@@ -1,0 +1,26 @@
+{
+  "name": "as-telnet-example",
+  "version": "1.0.0",
+  "description": "Telnet Server Example",
+  "main": "lib/server.js",
+  "scripts": {
+    "test": "asp",
+    "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --validate --debug",
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize",
+    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+  },
+  "keywords": [
+    "telnet",
+    "assemblyscript",
+    "webassembly",
+    "typescript"
+  ],
+  "author": "Joshua <tenner.joshua@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@as-pect/cli": "^2.3.1",
+    "assemblyscript": "github:assemblyscript/assemblyscript",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {}
+}
