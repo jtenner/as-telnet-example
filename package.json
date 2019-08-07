@@ -4,10 +4,13 @@
   "description": "Telnet Server Example",
   "main": "lib/server.js",
   "scripts": {
+    "start": "run-s test build server",
     "test": "asp",
+    "server": "node lib/index",
     "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --validate --debug",
-    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate -O3z",
+    "build": "run-p asbuild:untouched asbuild:optimized tsc",
+    "tsc": "tsc"
   },
   "keywords": [
     "telnet",
@@ -22,5 +25,8 @@
     "assemblyscript": "github:assemblyscript/assemblyscript",
     "typescript": "^3.5.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "ts-telnet2": "^0.1.1"
+  }
 }
