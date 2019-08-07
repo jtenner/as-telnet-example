@@ -83,16 +83,13 @@ server.on("connection", (socket) => {
     console.log(`SOCKET SUB ${underlying.remoteAddress}:${underlying.remotePort} -> ${Options[option]} ${data.inspect()}`);
   });
 
-  socket.on("data", (chunk) => {
+  socket.on("message", (message) => {
     // TODO:
     // 1. loop over plugins
     // 2. call parse()
     // 3. create jvalue from output using wasm apis
     // 4. pass jvalue object into callback
-    // @ts-ignore
     let underlying: net.Socket = socket.socket;
-    console.log(`SOCKET DATA ${underlying.remoteAddress}:${underlying.remotePort} -> ${chunk.toString(
-      socket.options[Options.BINARY_TRANSMISSION] ? "utf8" : "ascii",
-    )}`);
+    console.log(`SOCKET MESSAGE ${underlying.remoteAddress}:${underlying.remotePort} -> ${message}`);
   });
 });

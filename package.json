@@ -4,10 +4,15 @@
   "description": "Telnet Server Example",
   "main": "lib/server.js",
   "scripts": {
+    "start": "run-s test build server",
     "test": "asp",
+    "server": "node lib/index",
     "asbuild:untouched": "asc assembly/index.ts -b build/untouched.wasm -t build/untouched.wat --sourceMap --validate --debug",
-    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate --optimize",
-    "asbuild": "npm run asbuild:untouched && npm run asbuild:optimized"
+    "asbuild:optimized": "asc assembly/index.ts -b build/optimized.wasm -t build/optimized.wat --sourceMap --validate -O3z",
+    "build": "run-s build:all minify",
+    "build:all": "run-p asbuild:untouched asbuild:optimized tsc",
+    "minify": "terser --compress --mangle --sourcemap content --output ./lib/index.min.js -- lib/index.js",
+    "tsc": "tsc"
   },
   "keywords": [
     "telnet",
@@ -19,8 +24,17 @@
   "license": "MIT",
   "devDependencies": {
     "@as-pect/cli": "^2.3.1",
+    "@types/node": "^12.7.0",
     "assemblyscript": "github:assemblyscript/assemblyscript",
+    "terser": "^4.1.3",
     "typescript": "^3.5.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "npm-run-all": "^4.1.5",
+    "ts-telnet2": "^0.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jtenner/as-telnet-example.git"
+  }
 }
