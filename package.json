@@ -22,6 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "@as-pect/cli": "^2.3.1",
+    "@types/node": "^12.7.0",
     "assemblyscript": "github:assemblyscript/assemblyscript",
     "typescript": "^3.5.3"
   },
